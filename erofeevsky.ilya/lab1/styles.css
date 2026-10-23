@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.form-text {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  max-width: 100%;
+  max-height: 100px;
+  border: 1px solid black;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
