@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лабораторная работа 4</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <h1>Каталог одежды</h1>
+
+      <section class="panel">
+        <h2>Новый товар</h2>
+        <form class="item-form" data-testid="entity-form">
+          <label class="field">
+            <span class="field-label">ID</span>
+            <input class="field-control" type="number" name="id" required />
+          </label>
+          <label class="field">
+            <span class="field-label">Название</span>
+            <input class="field-control" type="text" name="name" required />
+          </label>
+          <label class="field">
+            <span class="field-label">Размер</span>
+            <select class="field-control" name="size">
+              <option value="S">S</option>
+              <option value="M">M</option>
+              <option value="L">L</option>
+              <option value="XL">XL</option>
+            </select>
+          </label>
+          <button class="button" type="submit">Добавить товар</button>
+        </form>
+        <p class="status" data-status role="status"></p>
+      </section>
+
+      <section class="panel">
+        <h2>Выборки по коллекции</h2>
+        <p class="summary-line">
+          Уникальные цвета:
+          <span class="summary-value" data-unique-colors></span>
+        </p>
+        <p class="summary-line">
+          Товаров по размерам: <span class="summary-value" data-by-size></span>
+        </p>
+        <p class="summary-line">
+          Товаров по количеству цветов:
+          <span class="summary-value" data-by-color-count></span>
+        </p>
+
+        <div class="filters">
+          <label class="field">
+            <span class="field-label">Доступны в цвете</span>
+            <select class="field-control" data-color-filter></select>
+          </label>
+          <label class="field">
+            <span class="field-label">Цветов больше чем</span>
+            <input
+              class="field-control"
+              type="number"
+              min="0"
+              value="0"
+              data-count-filter
+            />
+          </label>
+        </div>
+
+        <p class="summary-line">
+          В выбранном цвете:
+          <span class="summary-value" data-items-by-color></span>
+        </p>
+        <p class="summary-line">
+          Цветов больше указанного:
+          <span class="summary-value" data-items-above></span>
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Товары</h2>
+        <div class="item-list" data-testid="entity-list"></div>
+      </section>
+    </main>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
