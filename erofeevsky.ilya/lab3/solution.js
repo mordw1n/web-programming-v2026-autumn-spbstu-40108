@@ -1,12 +1,20 @@
 export function sortByFrequency(arr) {
-  const countMap = {};
+  if (!Array.isArray(arr)) {
+    throw new TypeError('Input must be an array');
+  }
+  const countMap = new Map();
   for (const num of arr) {
-    countMap[num] = (countMap[num] || 0) + 1;
+    countMap.set(num, (countMap.get(num) || 0) + 1);
   }
   return [...arr].sort((a, b) => {
-    if (countMap[b] === countMap[a]) {
+    const freqA = countMap.get(a);
+    const freqB = countMap.get(b);
+    if (freqB !== freqA) {
+      return freqB - freqA;
+    }
+    if (typeof a === 'number' && typeof b === 'number') {
       return a - b;
     }
-    return countMap[b] - countMap[a];
+    return String(a).localeCompare(String(b));
   });
 }
