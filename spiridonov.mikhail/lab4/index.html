@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лабораторная работа 4 — Пользователи и друзья (Вариант 36)</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1 class="title">Лабораторная работа 4</h1>
+        <p class="subtitle">
+          Вариант 36 | Пользователи и друзья (ООП, LocalStorage, Async)
+        </p>
+      </header>
+
+      <section class="form-section">
+        <h2 class="section-title">Добавить пользователя</h2>
+        <form class="user-form" data-testid="entity-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="user-id-input">ID пользователя</label>
+              <input
+                id="user-id-input"
+                class="form-input"
+                name="id"
+                type="number"
+                placeholder="Например, 101"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="user-name-input">Имя пользователя</label>
+              <input
+                id="user-name-input"
+                class="form-input"
+                name="name"
+                type="text"
+                placeholder="Иван Иванов"
+                required
+              />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            Добавить пользователя
+          </button>
+        </form>
+      </section>
+
+      <section class="list-section">
+        <h2 class="section-title">Список пользователей</h2>
+        <div class="cards-list" data-testid="entity-list"></div>
+      </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
