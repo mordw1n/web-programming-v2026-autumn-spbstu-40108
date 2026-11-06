@@ -62,6 +62,9 @@ function renderUsers() {
     card.className = 'user-card';
     card.setAttribute('data-testid', 'entity-card');
 
+    const topRow = document.createElement('div');
+    topRow.className = 'user-card-top';
+
     const info = document.createElement('div');
     info.className = 'user-info';
 
@@ -83,8 +86,71 @@ function renderUsers() {
     deleteBtn.dataset.userId = String(user.id);
     deleteBtn.textContent = 'Удалить';
 
-    card.appendChild(info);
-    card.appendChild(deleteBtn);
+    topRow.appendChild(info);
+    topRow.appendChild(deleteBtn);
+    card.appendChild(topRow);
+
+    const friendsBlock = document.createElement('div');
+    friendsBlock.className = 'friends-block';
+
+    const friendsHeader = document.createElement('div');
+    friendsHeader.className = 'friends-header';
+
+    const friendsTitle = document.createElement('span');
+    friendsTitle.textContent = 'Список друзей:';
+    friendsHeader.appendChild(friendsTitle);
+
+    const friendsChips = document.createElement('div');
+    friendsChips.className = 'friends-chips';
+
+    if (user.friends.length === 0) {
+      const noFriends = document.createElement('span');
+      noFriends.className = 'no-friends-text';
+      noFriends.textContent = 'нет друзей';
+      friendsChips.appendChild(noFriends);
+    } else {
+      user.friends.forEach((friendId) => {
+        const chip = document.createElement('span');
+        chip.className = 'friend-chip';
+        chip.textContent = `ID: ${friendId}`;
+
+        const removeFriendBtn = document.createElement('button');
+        removeFriendBtn.className = 'btn-remove-friend';
+        removeFriendBtn.setAttribute('type', 'button');
+        removeFriendBtn.setAttribute('title', 'Удалить друга');
+        removeFriendBtn.dataset.action = 'remove-friend';
+        removeFriendBtn.dataset.userId = String(user.id);
+        removeFriendBtn.dataset.friendId = String(friendId);
+        removeFriendBtn.textContent = '×';
+
+        chip.appendChild(removeFriendBtn);
+        friendsChips.appendChild(chip);
+      });
+    }
+
+    friendsHeader.appendChild(friendsChips);
+    friendsBlock.appendChild(friendsHeader);
+
+    const addFriendForm = document.createElement('form');
+    addFriendForm.className = 'add-friend-form';
+    addFriendForm.dataset.userId = String(user.id);
+
+    const friendInput = document.createElement('input');
+    friendInput.className = 'form-input form-input-sm';
+    friendInput.type = 'number';
+    friendInput.placeholder = 'ID друга';
+    friendInput.required = true;
+
+    const addFriendBtn = document.createElement('button');
+    addFriendBtn.className = 'btn btn-secondary btn-sm';
+    addFriendBtn.type = 'submit';
+    addFriendBtn.textContent = '+ Добавить друга';
+
+    addFriendForm.appendChild(friendInput);
+    addFriendForm.appendChild(addFriendBtn);
+    friendsBlock.appendChild(addFriendForm);
+
+    card.appendChild(friendsBlock);
     list.appendChild(card);
   });
 }
@@ -104,6 +170,10 @@ if (form) {
     const name = nameInput.value.trim();
 
     if (!id || !name) {
+      return;
+    }
+
+    if (users.some((u) => u.id === id)) {
       return;
     }
 
@@ -135,7 +205,58 @@ if (list) {
         saveUsers();
         renderUsers();
       }, ASYNC_DELAY_MS);
+      return;
     }
+
+    const removeFriendBtn = target.closest('[data-action="remove-friend"]');
+    if (
+      removeFriendBtn instanceof HTMLElement &&
+      removeFriendBtn.dataset.userId &&
+      removeFriendBtn.dataset.friendId
+    ) {
+      const userId = Number(removeFriendBtn.dataset.userId);
+      const friendId = Number(removeFriendBtn.dataset.friendId);
+      const targetUser = users.find((u) => u.id === userId);
+
+      if (targetUser) {
+        setTimeout(() => {
+          targetUser.removeFriend(friendId);
+          saveUsers();
+          renderUsers();
+        }, ASYNC_DELAY_MS);
+      }
+    }
+  });
+
+  list.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const target = event.target;
+    if (!(target instanceof HTMLFormElement)) {
+      return;
+    }
+
+    const userId = Number(target.dataset.userId);
+    const input = target.querySelector('input[type="number"]');
+    if (!input) {
+      return;
+    }
+
+    const friendId = Number(input.value);
+    const targetUser = users.find((u) => u.id === userId);
+
+    if (!targetUser || !friendId) {
+      return;
+    }
+
+    setTimeout(() => {
+      try {
+        targetUser.addFriend(friendId);
+        saveUsers();
+        renderUsers();
+      } catch (err) {
+        console.warn('Не удалось добавить друга:', err);
+      }
+    }, ASYNC_DELAY_MS);
   });
 }
 

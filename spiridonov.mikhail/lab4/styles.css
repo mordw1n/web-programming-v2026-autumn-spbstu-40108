@@ -92,6 +92,11 @@ body {
   color: #fff;
 }
 
+.btn-secondary {
+  background-color: #0284c7;
+  color: #fff;
+}
+
 .btn-danger {
   background-color: #ef4444;
   color: #fff;
@@ -107,12 +112,18 @@ body {
 
 .user-card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 12px;
   padding: 14px 18px;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   background-color: #f8fafc;
+}
+
+.user-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .user-info {
@@ -130,6 +141,88 @@ body {
 .user-meta {
   font-size: 13px;
   color: #64748b;
+}
+
+.friends-block {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.friends-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.friends-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.friend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e2e8f0;
+  color: #1e293b;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.btn-remove-friend {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+}
+
+.btn-remove-friend:hover {
+  background-color: #cbd5e1;
+  color: #ef4444;
+}
+
+.add-friend-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.form-input-sm {
+  width: 130px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.no-friends-text {
+  font-size: 12px;
+  color: #94a3b8;
+  font-style: italic;
+  font-weight: normal;
 }
 
 .empty-message {
