@@ -1,5 +1,5 @@
-import React, { StrictMode, useState, useEffect, useCallback } from 'react';
-import { createRoot } from 'react-dom/client';
+import React, {StrictMode, useState, useEffect, useCallback} from 'react';
+import {createRoot} from 'react-dom/client';
 import './styles.css';
 
 const INITIAL_BOOKS = [
@@ -11,8 +11,10 @@ const INITIAL_BOOKS = [
     genre: 'Программирование',
     price: 1850,
     rating: 4.8,
-    snippet: 'Создание, анализ и рефакторинг чистого и поддерживаемого программного кода.',
-    description: 'Даже плохой программный код может работать. Однако если код не является «чистым», это неизменно приведет к деградации структуры проекта. Эта книга полна реальных примеров того, как писать красивый, надежный и расширяемый код.',
+    snippet:
+      'Создание, анализ и рефакторинг чистого и поддерживаемого программного кода.',
+    description:
+      'Даже плохой программный код может работать. Однако если код не является «чистым», это неизменно приведет к деградации структуры проекта. Эта книга полна реальных примеров того, как писать красивый, надежный и расширяемый код.',
     icon: '💻',
   },
   {
@@ -23,8 +25,10 @@ const INITIAL_BOOKS = [
     genre: 'Архитектура ПО',
     price: 2400,
     rating: 4.9,
-    snippet: 'Классический каталог 23 фундаментальных шаблонов проектирования программных систем.',
-    description: 'В книге описаны простые и элегантные решения типовых задач, возникающих в объектно-ориентированном программировании. Паттерны разделены на порождающие, структурные и поведенческие.',
+    snippet:
+      'Классический каталог 23 фундаментальных шаблонов проектирования программных систем.',
+    description:
+      'В книге описаны простые и элегантные решения типовых задач, возникающих в объектно-ориентированном программировании. Паттерны разделены на порождающие, структурные и поведенческие.',
     icon: '🏛️',
   },
   {
@@ -35,8 +39,10 @@ const INITIAL_BOOKS = [
     genre: 'Веб-разработка',
     price: 3100,
     rating: 4.7,
-    snippet: 'Седьмое издание «Библии JavaScript» с глубоким разбором современного стандарта ES2020+.',
-    description: 'Исчерпывающее руководство по языку JavaScript и платформам веб-браузеров. Охватывает синтаксис, структуры данных, замыкания, прототипы, асинхронное программирование и работу с DOM.',
+    snippet:
+      'Седьмое издание «Библии JavaScript» с глубоким разбором современного стандарта ES2020+.',
+    description:
+      'Исчерпывающее руководство по языку JavaScript и платформам веб-браузеров. Охватывает синтаксис, структуры данных, замыкания, прототипы, асинхронное программирование и работу с DOM.',
     icon: '⚡',
   },
   {
@@ -48,12 +54,13 @@ const INITIAL_BOOKS = [
     price: 1600,
     rating: 4.6,
     snippet: 'Погружение в язык программирования и современное веб-окружение.',
-    description: 'Книга учит мыслить как программист, структурировать код, работать с функциональными конструкциями и браузерными API на наглядных практических проектах.',
+    description:
+      'Книга учит мыслить как программист, структурировать код, работать с функциональными конструкциями и браузерными API на наглядных практических проектах.',
     icon: '🚀',
   },
 ];
 
-function BookCard({ book, onSelect }) {
+function BookCard({book, onSelect}) {
   return (
     <article
       data-testid="book-card"
@@ -82,7 +89,7 @@ function BookCard({ book, onSelect }) {
   );
 }
 
-function BookModal({ isOpen, book, onClose }) {
+function BookModal({isOpen, book, onClose}) {
   const handleKeyDown = useCallback(
     (event) => {
       if (event.key === 'Escape' && isOpen) {
@@ -104,7 +111,9 @@ function BookModal({ isOpen, book, onClose }) {
   return (
     <div
       data-testid="book-modal"
-      className={isOpen ? 'modal-backdrop book-modal-visible' : 'book-modal-hidden'}
+      className={
+        isOpen ? 'modal-backdrop book-modal-visible' : 'book-modal-hidden'
+      }
       onClick={(event) => {
         if (event.target === event.currentTarget) {
           onClose();
