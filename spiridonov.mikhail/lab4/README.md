@@ -8,7 +8,8 @@
    друзей). Методы: `addFriend(friendId)`, `removeFriend(friendId)`, геттер
    `friendCount`.
 2. Функции обработки коллекций: `groupUsersByFriendCount`, `getUniqueFriends`,
-   `findUsersWithFriend`, `findUsersAboveFriendCount`, `findUsersWithoutFriends`.
+   `findUsersWithFriend`, `findUsersAboveFriendCount`,
+   `findUsersWithoutFriends`.
 3. Пользовательский интерфейс: форма добавления пользователя, список карточек
    сущностей с возможностью удаления, асинхронные операции через `setTimeout`,
    сохранение состояния в `localStorage`.
